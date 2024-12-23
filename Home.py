@@ -58,7 +58,7 @@ st.pydeck_chart(
             ),
             pdk.Layer(
                 "GeoJsonLayer",  # Add GeoJSON layer
-                filtered_geojson,  # Use the filtered GeoJSON
+                geojson_data,  # Use the filtered GeoJSON
                 get_fill_color=[255, 0, 0, 255],  # Color for the route line (red)
                 get_line_color=[255, 0, 0],  # Line color for the route (red)
                 line_width=4,  # Line width for the route
