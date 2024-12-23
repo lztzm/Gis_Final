@@ -22,7 +22,7 @@ m.add_points_from_xy(
     views,
     x="經度",
     y="緯度",
-    color_column="region",
+    color_column="市町村名",
     spin=True,
     add_legend=True,
 )
