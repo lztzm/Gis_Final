@@ -31,7 +31,6 @@ m.add_heatmap(
     views,
     latitude="緯度",
     longitude="經度",
-    value="pop_max",
     name="Heat map",
     radius=20,
 )
