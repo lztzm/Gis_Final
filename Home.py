@@ -29,6 +29,16 @@ markdown = """
 
 st.markdown(markdown)
 
+color_map = {
+        "Camino_Frances": [255, 0, 0],           # Vibrant red
+        "Camino_Ingles": [0, 0, 255],           # Strong blue
+        "Camino_Portugues_central": [255, 165, 0],  # Bright orange
+        "Camino_Primitivo": [0, 255, 0],        # Fresh green
+        "Camino_del_Norte": [128, 0, 128],      # Deep purple
+        "Portugues_Coastal": [255, 255, 0],     # Sunny yellow
+        "Via_de_la_Plata": [139, 69, 19],       # Earthy brown
+        "default": [0, 0, 0],                   # Default color if route not found
+    }
 
 # 準備數據
 data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%9C%8B%E7%B1%8D.csv")
