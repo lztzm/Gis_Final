@@ -43,7 +43,7 @@ layer = pdk.Layer(
     get_psition="[Y,X]",  # 使用 x, y, z
     get_elevation="Number/5",
     elevation_scale=800,
-    get_fill_color=f"[{color[0]}, {color[1]}, {color[2]}, 210]",
+    get_fill_color=[0, 0, 255],
         radius=80000,  # Radius of the columns
         pickable=True
 )
