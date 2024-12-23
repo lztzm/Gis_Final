@@ -66,8 +66,10 @@ st.pydeck_chart(
         ],
     )
 )
-    # Show the table of chart_data
-st.table(data)  # Display the chart data as a table
+
+chart_data = pd.read_csv("https://raw.githubusercontent.com/qaz7000810/tower/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4.csv")
+# Show the table of chart_data
+st.table(chart_data)  # Display the chart data as a table
 
 
 
