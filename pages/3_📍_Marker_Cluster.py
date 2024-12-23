@@ -19,7 +19,7 @@ with st.expander("See source code"):
     with st.echo():
 
         m = leafmap.Map(center=[40, -100], zoom=4)
-        views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/cleaned_data.csv"
+        views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
         m.add_points_from_xy(
             views,
             x="經度",
