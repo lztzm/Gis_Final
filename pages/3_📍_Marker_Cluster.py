@@ -17,20 +17,6 @@ st.title("Marker Cluster")
 
 with st.expander("See source code"):
     with st.echo():
-
-        m = leafmap.Map(center=[40, -100], zoom=4)
-        views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
-        m.add_points_from_xy(
-            views,
-            x="經度",
-            y="緯度",
-            icon_names=["gear", "map", "leaf", "globe"],
-            spin=True,
-            add_legend=True,
-        )
-
-with st.expander("See source code"):
-    with st.echo():
         filepath = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
         m = leafmap.Map(center=[40, -100], zoom=4)
         m.add_heatmap(
@@ -42,6 +28,20 @@ with st.expander("See source code"):
             radius=20,
         )
 
+with st.expander("See source code"):
+    with st.echo():
+
+        m = leafmap.Map(center=[40, -100], zoom=4)
+        views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
+        m.add_points_from_xy(
+            views,
+            x="經度",
+            y="緯度",
+            icon_names=["gear", "map", "leaf", "globe"],
+            spin=True,
+            add_legend=True,
+        )
+        
 with st.expander("See source code"):
     with st.echo():
         m = leafmap.Map()
