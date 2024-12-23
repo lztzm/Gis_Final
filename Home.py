@@ -4,10 +4,6 @@ import leafmap.foliumap as leafmap
 st.set_page_config(layout="wide")
 
 # Customize the sidebar
-markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
-"""
 
 st.sidebar.title("About")
 st.sidebar.info(markdown)
