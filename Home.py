@@ -29,19 +29,34 @@ markdown = """
 st.markdown(markdown)
 
 color_map = {
-        "Japan": [255, 0, 0]          # Vibrant red
+        "Camino_Frances": [255, 0, 0],           # Vibrant red
+        "Camino_Ingles": [0, 0, 255],           # Strong blue
+        "Camino_Portugues_central": [255, 165, 0],  # Bright orange
+        "Camino_Primitivo": [0, 255, 0],        # Fresh green
+        "Camino_del_Norte": [128, 0, 128],      # Deep purple
+        "Portugues_Coastal": [255, 255, 0],     # Sunny yellow
+        "Via_de_la_Plata": [139, 69, 19],       # Earthy brown
+        "default": [0, 0, 0],                   # Default color if route not found
     }
 
 data_urls_dict = {
-    "Japan": "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%9C%8B%E7%B1%8D.csv"
+    "Camino_Frances": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/1_Frances_travelers.csv",
+    "Camino_Ingles": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/6_Ingles_travelers.csv",
+    "Camino_Portugues_central": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/2_Portugues_travelers.csv",
+    "Camino_Primitivo": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/4_Primitivo_travelers.csv",
+    "Camino_del_Norte": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/3_Norte_travelers.csv",
+    "Portugues_Coastal": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/7_Muxia_travelers.csv",
+    "Via_de_la_Plata": "https://raw.githubusercontent.com/chinchillaZ/streamlit-hw/main/Camino/5_Plata_travelers.csv",
+    "default": ""  # Default key if route is not found
 }
+
 
 def show_map(csv_url, color):
     chart_data = pd.read_csv(csv_url)
-    chart_data = chart_data
+    chart_data = chart_data[chart_data["year"] == 2024]
 
    # Load the GeoJSON data from the URL
-    geojson_url = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/tourism_comefrom.geojson"
+    geojson_url = "https://chinchillaz.github.io/streamlit-hw/all_Camino_route.geojson"
     geojson_data = requests.get(geojson_url).json()
 
     # Filter the GeoJSON features based on the route_name
@@ -88,3 +103,4 @@ def show_map(csv_url, color):
     )
     # Show the table of chart_data
     st.table(chart_data)  # Display the chart data as a table
+
