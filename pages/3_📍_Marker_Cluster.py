@@ -31,15 +31,23 @@ with st.expander("See source code"):
 
 with st.expander("See source code"):
     with st.echo():
-        filepath = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
+        filepath = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
         m = leafmap.Map(center=[40, -100], zoom=4)
         m.add_heatmap(
             filepath,
-            latitude="latitude",
-            longitude="longitude",
+            latitude="緯度",
+            longitude="經度",
             value="pop_max",
             name="Heat map",
             radius=20,
         )
+
+with st.expander("See source code"):
+    with st.echo():
+        m = leafmap.Map()
+        m.split_map(
+            left_layer="ESA WorldCover 2020 S2 FCC", right_layer="ESA WorldCover 2020"
+        )
+        m.add_legend(title="ESA Land Cover", builtin_legend="ESA_WorldCover")
 
 m.to_streamlit(height=700)
