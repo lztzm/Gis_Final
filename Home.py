@@ -48,7 +48,7 @@ st.pydeck_chart(
         layers=[
             pdk.Layer(
                 "ColumnLayer",
-                data=chart_data,
+                data,
                 get_position="[Y, X]",  # Note: Longitude is X, Latitude is Y
                 get_elevation="Number / 10",  # Set the elevation (height of the column) proportional to 'Number'
                 elevation_scale=800,  # Scale factor for elevation 誇張程度
