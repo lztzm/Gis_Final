@@ -17,8 +17,8 @@ st.sidebar.image(logo)
 st.title("Marker Cluster")
 
 # 讀取 CSV 檔案並轉換為 DataFrame
-views_url = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
-views = pd.read_csv(views_url)
+views = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv")
+heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
 
 # 確保緯度與經度欄位存在
 if '緯度' not in views.columns or '經度' not in views.columns:
@@ -39,10 +39,10 @@ else:
     # 添加熱區地圖
     heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
     m.add_heatmap(
-        views,
+        heat_data,
         latitude="緯度",
         longitude="經度",
-        value="名稱",
+        value="景點數量",
         name="Heat map",
         radius=20,
     )
