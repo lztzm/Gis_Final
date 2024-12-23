@@ -19,15 +19,12 @@ with st.expander("See source code"):
     with st.echo():
 
         m = leafmap.Map(center=[40, -100], zoom=4)
-        cities = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_cities.csv"
-        regions = "https://raw.githubusercontent.com/giswqs/leafmap/master/examples/data/us_regions.geojson"
-
+        views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
         m.add_geojson(regions, layer_name="US Regions")
         m.add_points_from_xy(
-            cities,
-            x="longitude",
-            y="latitude",
-            color_column="region",
+            views,
+            x="經度",
+            y="緯度",
             icon_names=["gear", "map", "leaf", "globe"],
             spin=True,
             add_legend=True,
