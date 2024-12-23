@@ -20,7 +20,7 @@ m = leafmap.Map(center=[35.68388267239132, 139.77317043877568], zoom=12)
 views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv" 
     
 m.add_points_from_xy(
-    cities,
+    views,
     x="經度",
     y="緯度",
     color_column="region",
@@ -30,9 +30,9 @@ m.add_points_from_xy(
 
 heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
 m.add_heatmap(
-    filepath,
-    latitude="latitude",
-    longitude="longitude",
+    views,
+    latitude="緯度",
+    longitude="經度",
     value="pop_max",
     name="Heat map",
     radius=20,
