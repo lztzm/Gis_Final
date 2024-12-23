@@ -15,35 +15,31 @@ st.sidebar.image(logo)
 
 st.title("Marker Cluster")
 
-with st.expander("See source code"):
-    with st.echo():
-        filepath = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"
-        m = leafmap.Map(center=[40, -100], zoom=4)
-        m.add_points_from_xy(
-            filepath,
-            x="經度",
-            y="緯度",
-            icon_names=["gear", "map", "leaf", "globe"],
-            spin=True,
-            add_legend=True,
-        )
-        
-        m.add_heatmap(
-            filepath,
-            latitude="緯度",
-            longitude="經度",
-            value="pop_max",
-            name="Heat map",
-            radius=20,
-        )
-        
-        
-with st.expander("See source code"):
-    with st.echo():
-        m = leafmap.Map()
-        m.split_map(
-            left_layer="ESA WorldCover 2020 S2 FCC", right_layer="heatmap"
-        )
-        m.add_legend(title="ESA Land Cover", builtin_legend="ESA_WorldCover")
+m = leafmap.Map(center=(center_lat, center_lon), zoom=12)
 
+views = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv"       m.add_geojson(regions, layer_name="US Regions")
+    
+m.add_points_from_xy(
+    cities,
+    x="經度",
+    y="緯度",
+    color_column="region",
+    spin=True,
+    add_legend=True,
+)
+
+heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
+m.add_heatmap(
+    filepath,
+    latitude="latitude",
+    longitude="longitude",
+    value="pop_max",
+    name="Heat map",
+    radius=20,
+)
+
+# 新增圖層控制
+leafmap.folium.LayerControl().add_to(m)
+
+# 顯示地圖
 m.to_streamlit(height=700)
