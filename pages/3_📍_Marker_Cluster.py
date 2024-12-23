@@ -42,6 +42,7 @@ else:
         views,
         latitude="緯度",
         longitude="經度",
+        value="名稱",
         name="Heat map",
         radius=20,
     )
