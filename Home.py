@@ -53,7 +53,7 @@ st.pydeck_chart(
                 get_elevation="Number / 5",  # Set the elevation (height of the column) proportional to 'Number'
                 elevation_scale=800,  # Scale factor for elevation 誇張程度
                 get_color=[0, 0, 255],  # Color of the columns RGBA
-                radius=80000,  # Radius of the columns
+                radius=80,  # Radius of the columns
                 pickable=True,
             ),
             pdk.Layer(
