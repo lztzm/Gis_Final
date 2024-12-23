@@ -6,18 +6,12 @@ st.set_page_config(layout="wide")
 # Customize the sidebar
 
 st.sidebar.title("About")
-st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
 # Customize page title
 st.title("東京的旅遊景點以及鐵路視覺化")
 
-st.markdown(
-    """
-    This multipage app template demonstrates various interactive web apps created using [streamlit](https://streamlit.io) and [leafmap](https://leafmap.org). It is an open-source project and you are very welcome to contribute to the [GitHub repository](https://github.com/opengeos/streamlit-map-template).
-    """
-)
 
 st.header("簡介")
 
