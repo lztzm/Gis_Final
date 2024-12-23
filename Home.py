@@ -104,3 +104,56 @@ def show_map(csv_url, color):
     # Show the table of chart_data
     st.table(chart_data)  # Display the chart data as a table
 
+
+# Create two rows using columns
+upper_row = st.columns(3)  # Upper row with 3 buttons
+lower_row = st.columns(4)  # Lower row with 4 buttons
+
+
+if upper_row[0].button("法國之路", use_container_width=True):
+    route_name = "Camino_Frances"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+    
+if upper_row[1].button("葡萄牙之路", use_container_width=True):
+    route_name = "Camino_Portugues_central"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+
+if upper_row[2].button("北方之路", use_container_width=True):
+    route_name = "Camino_del_Norte"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+
+# Lower row buttons
+if lower_row[0].button("原始之路", use_container_width=True):
+    route_name = "Camino_Primitivo"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+    
+if lower_row[1].button("銀之路", use_container_width=True):
+    route_name = "Via_de_la_Plata"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+    
+if lower_row[2].button("英國之路", use_container_width=True):
+    route_name = "Camino_Ingles"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+    
+if lower_row[3].button("世界盡頭之路", use_container_width=True):
+    route_name = "Portugues_Coastal"
+    data_url = data_urls_dict.get(route_name, data_urls_dict["default"])
+    color = color_map.get(route_name, color_map["default"])
+    show_map(data_url, color)
+
+
+
+
+st.markdown("<br><br><br>", unsafe_allow_html=True)  # Adds three line breaks
