@@ -68,7 +68,7 @@ st.pydeck_chart(
     )
 )
     # Show the table of chart_data
-    st.table(chart_data)  # Display the chart data as a table
+st.table(chart_data)  # Display the chart data as a table
 
 
 
