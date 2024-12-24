@@ -31,12 +31,12 @@ response = requests.get(region_url)
 geojson_data = response.json()
 
 response_railway = requests.get(railway_url)
-geojson_data_rail = response.json()
+geojson_data_rail = response_railway.json()
 
 # 提取唯一的 `name:en` 屬性
 unique_names = set(
     feature["properties"].get("name:en", "Unknown")
-    for feature in geojson_data["features"]
+    for feature in geojson_data_rail["features"]
 )
 
 # 自動生成顏色表
@@ -48,7 +48,7 @@ color_map = {name: color_palette[i % len(color_palette)] for i, name in enumerat
 def style_function(feature):
     name = feature["properties"].get("name:en", "Unknown")
     return {
-        "color": color_map.get(name, "#000000"),  # 自動顏色
+        "color": color_map.get(name, "#000000"),  # 根據 name:en 屬性設置顏色
         "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
@@ -66,8 +66,9 @@ station_layer = m.add_points_from_xy(
     layer_name = "Station",
 )
 
+# 添加鐵路路線圖層，根據 name:en 顯示不同顏色
 m.add_geojson(
-    railway_url,
+    geojson_data_rail,
     layer_name="鐵路路線",
     style_function=style_function,
 )
