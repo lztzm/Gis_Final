@@ -79,6 +79,6 @@ m.to_streamlit(height=700)
 
     ########################################################
 # 根據選擇的行政區顯示表格
-Hotel_display = pd.read.csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE_display.csv")
+Hotel_display = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE_display.csv")
 st.subheader("飯店資料")
 st.dataframe(Hotel_display, height=400)  # 設置高度並讓表格可滾動
