@@ -21,7 +21,7 @@ st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
-st.title("_🥰_觀光景點及熱點分佈")
+st.title("🥰觀光景點及熱點分佈")
 
 # 讀取景點和熱區數據
 views = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv")
