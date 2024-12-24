@@ -43,26 +43,15 @@ color_map = {name: color_palette[i % len(color_palette)] for i, name in enumerat
 # 自定義樣式函數
 def style_function(feature):
     name = feature["properties"].get("name:en", "Unknown")
+    length = feature["properties"].get("length", 1000)  # 假設 GeoJSON 有 `length` 屬性
     return {
-        "color": color_map.get(name, "#000000"),  # 默認黑色
-        "weight": 2,
+        "color": color_map.get(name, "#000000"),  # 自動顏色
+        "weight": max(2, length / 1000),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
     
 # 創建地圖
 m = leafmap.Map()
-
-# 熱區圖層
-heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
-m.add_heatmap(
-    heat_data,
-    latitude="緯度",
-    longitude="經度",
-    value="景點數量",
-    name="Heat map",
-    radius=20,
-)
-
 # 酒店圖層
 hotel_layer = m.add_points_from_xy(
     hotel,
@@ -89,11 +78,11 @@ m.add_geojson(
     style_function=style_function,
 )
 
-# 使用 split_map 顯示兩個圖層
-m.split_map(
-    left_layer="OpenStreetMap",
-    right_layer="OpenStreetMap"
-)
+
+# 添加顏色圖例到地圖
+legend_dict = {name: color_map[name] for name in unique_names}
+m.add_legend(title="鐵路名稱 (name:en)", legend_dict=legend_dict)
+
 
 # 顯示地圖
 m.to_streamlit(height=700)
