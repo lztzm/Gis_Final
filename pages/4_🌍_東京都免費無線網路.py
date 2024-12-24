@@ -7,6 +7,15 @@ import streamlit as st
 # 設置頁面配置
 st.set_page_config(layout="wide", page_title="Public Wireless LAN Data", page_icon=":globe_with_meridians:")
 
+markdown = """
+東京可以說是自動販賣機之城，到處都可以找到自動販賣機的蹤影。從飲料和小吃到雨傘、鮮花甚至新鮮雞蛋等更不尋常的物品，只有你想不到，沒有你買不到！
+"""
+
+st.sidebar.title("東京小知識")
+st.sidebar.info(markdown)
+logo = "https://i.imgur.com/UbOXYAU.png"
+st.sidebar.image(logo)
+
 # 加載數據
 @st.cache_resource
 def load_data():
