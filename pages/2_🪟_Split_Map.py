@@ -2,8 +2,6 @@ import streamlit as st
 import leafmap.foliumap as leafmap
 import pandas as pd
 import requests
-import random
-import matplotlib.colors as mcolors
 import folium
 
 st.set_page_config(layout="wide")
@@ -33,6 +31,16 @@ geojson_data = response.json()
 response_railway = requests.get(railway_url)
 geojson_data_rail = response_railway.json()
 
+# 自定義樣式函數，根據 "colour" 屬性設置顏色
+def style_function(feature):
+    colour = feature["properties"].get("colour", "#000000")  # 默認為黑色
+    return {
+        "color": colour,  # 邊界顏色
+        "weight": 2,      # 邊界寬度
+        "fillOpacity": 0.2,   # 填充透明度
+        "fillColor": colour,  # 填充顏色
+    }
+
 # 創建地圖
 m = leafmap.Map()
 
@@ -46,15 +54,11 @@ station_layer = m.add_points_from_xy(
     layer_name = "Station",
 )
 
-# 添加鐵路路線圖層，根據 name:en 顯示不同顏色
+# 添加鐵路路線圖層，根據 "colour" 屬性顯示不同顏色
 m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
-    style={
-        "color": "colour",
-        "weight": 2,      # 邊界寬度
-        "fillOpacity": 0.2,   # 填充透明度
-    },
+    style_function=style_function,  # 使用自定義樣式函數
 )
 
 # 提供選擇行政區的功能
