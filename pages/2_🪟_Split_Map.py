@@ -45,17 +45,10 @@ hotel_layer = m.add_points_from_xy(
 )
 
 # 車站圖層
-station_layer = m.add_points_from_xy(
-    station,
-    x="經度",
-    y="緯度",
-    spin=True,
-    add_legend=True,
-)
 
 # 使用 split_map 顯示兩個圖層
 m.split_map(
-    left_layer=station_layer,
+    left_layer=heatmap_layer,
     right_layer=hotel_layer
 )
 
