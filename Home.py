@@ -79,6 +79,7 @@ fig = px.pie(
     hole=0.3,  # 中心空洞比例（甜甜圈圖效果）
 )
 
+st.plotly_chart(fig)
 #########################################
 chart_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4.csv")
 # Show the table of chart_data
