@@ -27,7 +27,7 @@ st.title("Marker Cluster with GeoJSON Filtering and Location")
 Hotel = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE.csv")
 heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
 
-m = leafmap.Map(center=map_center, zoom=12)
+m = leafmap.Map(center=[35.68388267239132, 139.77317043877568], zoom=12)
 # 添加篩選後的點標記
 m.add_points_from_xy(
  Hotel,  # 使用篩選後的資料
