@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import random
 import matplotlib.colors as mcolors
+import folium
 
 st.set_page_config(layout="wide")
 
@@ -21,12 +22,12 @@ st.title("Split-panel Map")
 
 # 讀取數據
 heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
-hotel = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE.csv")
 station = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%B7%AF%E7%B7%9A%E5%9C%96.csv")
-railway_url = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E9%90%B5%E8%B7%AF.geojson"
+railway = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E9%90%B5%E8%B7%AF.geojson")
+region_url = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%A1%8C%E6%94%BF%E5%8D%80%E5%88%86%E7%95%8C.geojson"
 
 # 從 URL 加載 GeoJSON 文件
-response = requests.get(railway_url)
+response = requests.get(region_url)
 geojson_data = response.json()
 
 # 提取唯一的 `name:en` 屬性
@@ -48,18 +49,9 @@ def style_function(feature):
         "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
-    
+
 # 創建地圖
 m = leafmap.Map()
-# 酒店圖層
-hotel_layer = m.add_points_from_xy(
-    hotel,
-    x="經度",
-    y="緯度",
-    spin=True,
-    add_legend=True,
-    layer_name = "Hotel",
-)
 
 # 車站圖層
 station_layer = m.add_points_from_xy(
@@ -72,16 +64,45 @@ station_layer = m.add_points_from_xy(
 )
 
 m.add_geojson(
-    geojson_data,
+    railway,
     layer_name="鐵路路線",
     style_function=style_function,
 )
 
+# 提供選擇行政區的功能
+districts = ['全部區域'] + list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
+selected_district = st.selectbox('選擇行政區', districts)
+
+# 根據選擇的行政區過濾 GeoJSON 數據
+if selected_district != '全部區域':
+    filtered_geojson = {
+        "type": "FeatureCollection",
+        "features": [feature for feature in geojson_data["features"] if feature["properties"].get("laa", "") == selected_district]
+    }
+else:
+    filtered_geojson = geojson_data  # 如果選擇 "全部區域"，顯示全部區域
+
+# 添加篩選後的 GeoJSON 圖層
+m.add_geojson(
+    filtered_geojson,  # 使用篩選後的 GeoJSON 數據
+    layer_name="行政區域",
+    style={
+        "color": "blue",  # 邊界顏色
+        "weight": 2,      # 邊界寬度
+        "fillColor": "cyan",  # 填充顏色
+        "fillOpacity": 0.2,   # 填充透明度
+    },
+)
 
 # 添加顏色圖例到地圖
 legend_dict = {name: color_map[name] for name in unique_names}
 m.add_legend(title="鐵路名稱 (name:en)", legend_dict=legend_dict)
 
+# 添加定位功能
+folium.plugins.LocateControl().add_to(m)
+
+# 新增圖層控制
+m.add_layer_control()
 
 # 顯示地圖
 m.to_streamlit(height=700)
