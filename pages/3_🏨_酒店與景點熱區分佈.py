@@ -24,8 +24,20 @@ st.title("🏨酒店與景點熱區分佈")
 
 markdown = """
 這一頁是觀光景點及熱點分佈，這邊你可以找到
+"""
+st.markdown(markdown)
+
+markdown = """
 -) 觀光景點及其熱點分佈圖
+"""
+st.markdown(markdown)
+
+markdown = """
 -) 酒店的點分佈、圖表及補充資料
+"""
+st.markdown(markdown)
+
+markdwon= """
 -) 東京鐵路路線圖
 """
 st.markdown(markdown)
