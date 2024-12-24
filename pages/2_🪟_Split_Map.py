@@ -51,7 +51,8 @@ m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
     style={
-        "color": "colour"
+        "color": "colour",
+        "weight": 2,      # 邊界寬度
         "fillOpacity": 0.2,   # 填充透明度
     },
 )
