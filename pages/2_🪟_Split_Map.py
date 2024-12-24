@@ -69,9 +69,9 @@ else:
         layer_name="行政區域",
         style={
             "color": "grey",  # 邊界顏色
-            "weight": 2,      # 邊界寬度
-            "fillColor": "wihte",  # 填充顏色
-            "fillOpacity": 0.1,   # 填充透明度
+            "weight": 1.5,      # 邊界寬度
+            "opacity": 0.5,     # Line transparency
+            "fillColor": "none",  # 填充顏色
         },
     )
 
