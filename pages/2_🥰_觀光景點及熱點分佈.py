@@ -22,7 +22,6 @@ st.sidebar.image(logo)
 
 st.title("🥰觀光景點及熱點分佈")
 
-st.markdown(markdown)
 markdown = """
 這一頁是觀光景點及熱點分佈，這邊你可以找到
 """
