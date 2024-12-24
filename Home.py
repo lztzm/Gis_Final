@@ -69,7 +69,7 @@ st.pydeck_chart(
     )
 )
 #########################################
-pie = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4%20%E6%A9%AB%E5%BC%8F.csv")
+pie = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4_%E7%99%BE%E5%88%86%E6%AF%94.csv")
 # 繪製圓餅圖
 fig = px.pie(
     pie,
