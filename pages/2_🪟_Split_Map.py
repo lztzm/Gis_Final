@@ -41,10 +41,10 @@ unique_names = set(
 
 # 自定義樣式函數
 def style_function(feature):
-    # 從 GeoJSON 特徵中提取顏色屬性
-    color = feature["properties"].get("color", "#000000")  # 默認顏色為黑色
+    # 從 GeoJSON 特徵中獲取顏色
+    color = feature["properties"].get("color", "#000000")  # 默認為黑色，如果沒有 color 屬性
     return {
-        "color": color,  # 使用 GeoJSON 中的 `color` 屬性作為顏色
+        "color": color,  # 根據 color 欄位設置顏色
         "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
@@ -59,20 +59,15 @@ station_layer = m.add_points_from_xy(
     y="lon",
     spin=True,
     add_legend=True,
-    layer_name="Station",
+    layer_name = "Station",
 )
 
-# 添加鐵路路線圖層，根據 GeoJSON 的 `color` 欄位來顯示顏色
-railway_layer = m.add_geojson(
+# 添加鐵路路線圖層，根據 GeoJSON 中的 color 欄位顯示顏色
+m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
     style_function=style_function,
 )
-
-# 設置每個鐵路路線的 popup
-for feature in geojson_data_rail["features"]:
-    popup = folium.GeoJsonPopup(fields=["name", "name:en", "name:zh"], labels=True)
-    folium.GeoJson(feature, popup=popup).add_to(railway_layer)
 
 # 提供選擇行政區的功能
 districts = ['全部區域'] + list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
@@ -105,7 +100,7 @@ legend_html = """
     <ul style="list-style: none; padding: 0;">
 """
 for name in unique_names:
-    legend_html += f'<li style="color: {color_map.get(name, "#000000")};">{name}</li>'
+    legend_html += f'<li style="color: {color_map.get(name, "#000000")}">{name}</li>'
 legend_html += "</ul></div>"
 
 # 使用 Streamlit 的 HTML 顯示自定義圖例
