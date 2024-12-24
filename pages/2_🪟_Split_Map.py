@@ -22,6 +22,30 @@ hotel = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/r
 station = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%B7%AF%E7%B7%9A%E5%9C%96.csv")
 railway = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E9%90%B5%E8%B7%AF.geojson"
 
+# 從 URL 加載 GeoJSON 文件
+response = requests.get(railway_url)
+geojson_data = response.json()
+
+# 提取唯一的 `name:en` 屬性
+unique_names = set(
+    feature["properties"].get("name:en", "Unknown")
+    for feature in geojson_data["features"]
+)
+
+# 自動生成顏色表
+color_palette = list(mcolors.CSS4_COLORS.keys())  # 使用 Matplotlib 的顏色表
+random.shuffle(color_palette)  # 隨機排序
+color_map = {name: color_palette[i % len(color_palette)] for i, name in enumerate(unique_names)}
+
+# 自定義樣式函數
+def style_function(feature):
+    name = feature["properties"].get("name:en", "Unknown")
+    return {
+        "color": color_map.get(name, "#000000"),  # 默認黑色
+        "weight": 2,
+        "opacity": 0.8,
+    }
+    
 # 創建地圖
 m = leafmap.Map()
 
@@ -57,9 +81,9 @@ station_layer = m.add_points_from_xy(
 )
 
 m.add_geojson(
-    railway,
-    color = "grey",
+    geojson_data,
     layer_name="鐵路路線",
+    style_function=style_function,
 )
 
 # 使用 split_map 顯示兩個圖層
