@@ -5,6 +5,8 @@ import geopandas as gpd
 import json
 import folium
 from folium.plugins import LocateControl
+import requests
+import json
 
 # 移動 set_page_config 到最前面
 st.set_page_config(layout="wide")
@@ -27,7 +29,9 @@ heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Proje
 
 # 讀取 GeoJSON 數據
 geojson_url =  "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%A1%8C%E6%94%BF%E5%8D%80%E5%88%86%E7%95%8C.geojson" # 替換成你的 URL
-geojson_data = gpd.read_file(geojson_url)
+
+response = requests.get(region_url)
+geojson_data = response.json()
 
 # 確保緯度與經度欄位存在
 if '緯度' not in views.columns or '經度' not in views.columns:
