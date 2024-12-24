@@ -52,8 +52,9 @@ m.add_geojson(
     layer_name="鐵路路線",
     style={
         "color": "colour"
-        "weight": max(2, 5),  # 動態寬度，最小為 2
+        "weight": max(2, 5), 
         "opacity": 0.8,
+    },
 )
 
 # 提供選擇行政區的功能
