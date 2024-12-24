@@ -17,7 +17,7 @@ markdown = """
 
 st.sidebar.title("日本小知識")
 st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
+logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
 
 st.title("🥰觀光景點及熱點分佈")
