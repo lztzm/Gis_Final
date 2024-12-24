@@ -106,7 +106,7 @@ else:
     # 繪製圓餅圖
     try:
         fig = px.pie(
-            filtered_heat_data,
+            filtered_pie,
             names=selected_x,
             values=selected_y,
             title=f"圓餅圖 - {selected_district}",
