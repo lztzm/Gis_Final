@@ -81,6 +81,44 @@ fig = px.pie(
 
 st.plotly_chart(fig)
 #########################################
+# 確認資料格式
+if pie.empty or len(pie.columns) < 2:
+    st.error("數據有誤，請確認資料格式正確。")
+else:
+    # 選擇欄位
+    st.sidebar.title("圓餅圖設定")
+    columns = pie.columns.tolist()
+
+    # 提供用戶選擇 X（名稱）和 Y（數值）
+    selected_x = st.sidebar.selectbox("選擇名稱欄位 (X)", columns, index=columns.index("國家/入境機場") if "國家/入境機場" in columns else 0)
+    selected_y = st.sidebar.selectbox("選擇數值欄位 (Y)", columns, index=columns.index("全體") if "全體" in columns else 1)
+
+    # 選擇行政區
+    districts = ["全部區域"] + pie["國家/入境機場"].unique().tolist()
+    selected_district = st.sidebar.selectbox("國家", districts)
+
+    # 過濾數據
+    if selected_district == "全部區域":
+        filtered_pie = pie
+    else:
+        filtered_pie = pie[pie["國家/入境機場"] == selected_district]
+
+    # 繪製圓餅圖
+    try:
+        fig = px.pie(
+            filtered_heat_data,
+            names=selected_x,
+            values=selected_y,
+            title=f"圓餅圖 - {selected_district}",
+            hole=0.2,  # 中心空洞比例
+        )
+
+        # 顯示圓餅圖
+        st.plotly_chart(fig, use_container_width=True)
+
+    except Exception as e:
+        st.error(f"無法生成圓餅圖，請檢查選擇的欄位。錯誤訊息：{e}")
+#########################################
 chart_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4_%E7%99%BE%E5%88%86%E6%AF%94.csv")
 # Show the table of chart_data
 st.table(chart_data)  # Display the chart data as a table
