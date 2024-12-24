@@ -106,7 +106,15 @@ else:
     m.to_streamlit(height=700)
 
     ########################################################
-# 根據選擇的行政區顯示表格
-st.subheader(f"景點資料 - {selected_district}")
-st.dataframe(filtered_views, height=400)  # 設置高度並讓表格可滾動
+# 讀取景點展示數據
+views_display = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E_display.csv")
 
+# 根據選擇的行政區過濾表格資料
+if selected_district == "全部區域":
+    filtered_display = views_display  # 不過濾
+else:
+    filtered_display = views_display[views_display["市町村名"] == selected_district]  # 過濾資料
+
+# 顯示篩選後的表格
+st.subheader(f"景點資料 - {selected_district}")
+st.dataframe(filtered_display, height=400)  # 設置高度並讓表格可滾動
