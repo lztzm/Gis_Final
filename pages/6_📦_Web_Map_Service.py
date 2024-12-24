@@ -1,6 +1,7 @@
 import streamlit as st
 import folium
 from folium.plugins import LocateControl
+from streamlit_folium import st_folium
 import geocoder
 
 st.set_page_config(layout="wide")
