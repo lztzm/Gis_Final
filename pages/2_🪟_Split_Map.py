@@ -33,23 +33,6 @@ geojson_data = response.json()
 response_railway = requests.get(railway_url)
 geojson_data_rail = response_railway.json()
 
-# 提取唯一的 `name:en` 屬性
-unique_names = set(
-    feature["properties"].get("colour", "Unknown")
-    for feature in geojson_data_rail["features"]
-)
-
-# 自定義樣式函數，根據 `colour` 欄位設置顏色
-def style_function(feature):
-    colour = feature["properties"].get("colour", "#000000")  # 根據 colour 欄位設置顏色
-    return {
-        "color": colour,  # 邊界顏色
-        "weight": max(2, 5),  # 動態寬度，最小為 2
-        "opacity": 0.8,
-        "fillColor": colour,  # 填充顏色與邊界顏色相同
-        "fillOpacity": 0.2,   # 填充透明度
-    }
-
 # 創建地圖
 m = leafmap.Map()
 
@@ -60,14 +43,17 @@ station_layer = m.add_points_from_xy(
     y="lon",
     spin=True,
     add_legend=True,
-    layer_name="Station",
+    layer_name = "Station",
 )
 
 # 添加鐵路路線圖層，根據 name:en 顯示不同顏色
 m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
-    style_function=style_function,
+    style={
+        "color": "colour"
+        "weight": max(2, 5),  # 動態寬度，最小為 2
+        "opacity": 0.8,
 )
 
 # 提供選擇行政區的功能
@@ -87,20 +73,13 @@ else:
 m.add_geojson(
     filtered_geojson,  # 使用篩選後的 GeoJSON 數據
     layer_name="行政區域",
-    style=style_function  # 使用自定義的樣式函數
+    style={
+        "color": "blue",  # 邊界顏色
+        "weight": 2,      # 邊界寬度
+        "fillColor": "cyan",  # 填充顏色
+        "fillOpacity": 0.2,   # 填充透明度
+    },
 )
-
-# 自定義 HTML 來顯示可滾動的圖例
-legend_html = """
-<div style="max-height: 200px; overflow-y: scroll; padding: 10px;">
-    <ul style="list-style: none; padding: 0;">
-"""
-for colour in unique_colours:
-    legend_html += f'<li style="color: {colour};">{colour}</li>'
-legend_html += "</ul></div>"
-
-# 使用 Streamlit 的 HTML 顯示自定義圖例
-st.markdown(legend_html, unsafe_allow_html=True)
 
 # 添加定位功能
 folium.plugins.LocateControl().add_to(m)
