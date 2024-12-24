@@ -20,6 +20,7 @@ st.title("Split-panel Map")
 heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
 hotel = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE.csv")
 station = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%B7%AF%E7%B7%9A%E5%9C%96.csv")
+railway = "https://github.com/lztzm/Gis_Final_Project/blob/main/%E6%9D%B1%E4%BA%AC%E9%90%B5%E8%B7%AF.geojson"
 
 # 創建地圖
 m = leafmap.Map()
@@ -49,6 +50,7 @@ station_layer = m.add_points_from_xy(
     station,
     x="lat",
     y="lon",
+    color_column="railway",
     spin=True,
     add_legend=True,
 )
