@@ -47,7 +47,7 @@ m.add_heatmap(
  longitude="經度",
  value="景點數量",
  name="Heat map",
- radius=10,
+ radius=25,
  opacity = 0.2,
 )
 
