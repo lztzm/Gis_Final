@@ -75,7 +75,7 @@ fig = px.pie(
     pie,
     names="國家/入境機場",
     values="全體",
-    title="入境機場百分比",
+    title="入境機場圓餅圖",
     hole=0,  # 中心空洞比例（甜甜圈圖效果）
 )
 
