@@ -1,7 +1,6 @@
 import streamlit as st
 import folium
 from folium.plugins import LocateControl
-from streamlit_folium import st_folium
 import geocoder
 
 st.set_page_config(layout="wide")
@@ -10,8 +9,6 @@ markdown = """
 A Streamlit map template
 <https://github.com/opengeos/streamlit-map-template>
 """
-
-
 
 # 顯示搜尋框
 search_location = st.text_input("搜尋地點", "Tokyo")  # 預設為東京
