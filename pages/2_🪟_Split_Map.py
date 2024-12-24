@@ -19,14 +19,14 @@ heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Proje
 
 m = leafmap.Map()
 heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
-    m.add_heatmap(
-        heat_data,
-        latitude="緯度",
-        longitude="經度",
-        value="景點數量",
-        name="Heat map",
-        radius=20,
-    )
+m.add_heatmap(
+    heat_data,
+    latitude="緯度",
+    longitude="經度",
+    value="景點數量",
+    name="Heat map",
+    radius=20,
+)
 
 m.split_map(
     left_layer="ESA WorldCover 2020 S2 FCC", right_layer="Heat map"
