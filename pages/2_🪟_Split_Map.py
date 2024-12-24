@@ -1,6 +1,9 @@
 import streamlit as st
 import leafmap.foliumap as leafmap
 import pandas as pd
+import requests
+import random
+import matplotlib.colors as mcolors
 
 st.set_page_config(layout="wide")
 
