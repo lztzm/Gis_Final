@@ -19,6 +19,20 @@ st.sidebar.image(logo)
 
 st.title("🚃東京鐵路圖")
 
+markdown = """
+這一頁是東京鐵路圖，這邊你可以找到
+-) 東京各車站
+-) 東京鐵路圖
+
+可以透過上面的按鈕搜尋想要的行政區哦
+同時下方地圖也有定位功能哦
+
+👈🏻按這邊有更多內容哦！
+
+"""
+
+st.markdown(markdown)
+
 # 讀取數據
 heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
 station = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%BB%8A%E7%AB%99%E9%BB%9E%E4%BD%8D.csv")
