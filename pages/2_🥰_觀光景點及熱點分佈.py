@@ -22,6 +22,7 @@ st.sidebar.image(logo)
 
 st.title("🥰觀光景點及熱點分佈")
 
+st.markdown(markdown)
 markdown = """
 這一頁是觀光景點及熱點分佈，這邊你可以找到
 """
@@ -41,9 +42,6 @@ markdown = """
 👈🏻按這邊有更多內容哦！
 
 """
-
-st.markdown(markdown)
-
 
 # 讀取景點和熱區數據
 views = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E6%99%AF%E9%BB%9E.csv")
