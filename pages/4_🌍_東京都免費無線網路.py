@@ -11,7 +11,7 @@ markdown = """
 東京可以說是自動販賣機之城，到處都可以找到自動販賣機的蹤影。從飲料和小吃到雨傘、鮮花甚至新鮮雞蛋等更不尋常的物品，只有你想不到，沒有你買不到！
 """
 
-st.sidebar.title("東京小知識")
+st.sidebar.title("東京冷知識")
 st.sidebar.info(markdown)
 logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
