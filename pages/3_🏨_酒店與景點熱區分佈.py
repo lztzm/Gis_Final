@@ -12,11 +12,10 @@ import json
 st.set_page_config(layout="wide")
 
 markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
+東京世界上人口最多的大都市。截至 2024 年，包括東京及其附近縣在內的東京都市區擁有驚人的 4080 萬居民。該市的人口密度同樣令人印象深刻，每平方公里約有6,000人。
 """
 
-st.sidebar.title("About")
+st.sidebar.title("東京小知識")
 st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
