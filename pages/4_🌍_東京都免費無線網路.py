@@ -16,6 +16,16 @@ st.sidebar.info(markdown)
 logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
 
+"""
+這一頁是東京都免費無線網路，這邊你可以找到
+"""
+"""
+東京哪裡有免費的網絡~ 在這個時代，網絡可以說是人類最重要的東西之一！ 在這裡，你會知道哪裡可以蹭好蹭滿，就算旅遊的時候把網絡用完都沒關係！
+"""
+"""
+👈🏻按這邊有更多內容哦！
+"""
+
 # 加載數據
 @st.cache_resource
 def load_data():
@@ -80,10 +90,6 @@ if not data.empty:
     try:
         midpoint = mpoint(data["緯度"], data["経度"])
         st.title("🌍東京都免費無線網路")
-        st.write(
-            """
-            東京都中，免費無線網路之面量圖。
-            """
         )
         map(data, midpoint[0], midpoint[1], 11)
     except Exception as e:
