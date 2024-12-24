@@ -73,7 +73,7 @@ pie = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/ref
 # 繪製圓餅圖
 fig = px.pie(
     pie,
-    names="國家/入境機場	",
+    names="國家/入境機場",
     values="全體",
     title="景點數量圓餅圖",
     hole=0.3,  # 中心空洞比例（甜甜圈圖效果）
