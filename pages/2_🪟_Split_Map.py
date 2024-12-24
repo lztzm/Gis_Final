@@ -50,7 +50,7 @@ def style_function(feature):
     colour = feature["properties"].get("colour", "#000000")  # 默認為黑色
     return {
         "color": colour,  # 邊界顏色
-        "weight": 4,      # 邊界寬度
+        "weight": 3,      # 邊界寬度
         "fillOpacity": 0.2,   # 填充透明度
         "fillColor": colour,  # 填充顏色
     }
@@ -93,17 +93,23 @@ folium.plugins.LocateControl().add_to(m)
 # 新增圖層控制
 m.add_layer_control()
 
-# 創建可滾動的圖例
+# 創建可滾動的顏色圖例，並將其放置在地圖下方
 def add_color_legend(map_obj, geojson_data):
     color_list = list(set([feature["properties"].get("colour", "#000000") for feature in geojson_data["features"]]))
-    color_list = sorted(color_list)  # 排序顏色
+    name_list = list(set([feature["properties"].get("name:en", "Unknown") for feature in geojson_data["features"]]))
+    
+    # 排序顏色和名稱（這裡假設顏色與名稱是一一對應的）
+    color_name_pairs = sorted(zip(color_list, name_list))
+    
     legend_html = '''
-    <div style="position: absolute; top: 10px; right: 10px; background: white; border: 2px solid #ccc; padding: 10px; z-index: 9999;">
+    <div style="position: absolute; bottom: 10px; left: 10px; background: white; border: 2px solid #ccc; padding: 10px; z-index: 9999;">
         <h4>顏色圖例</h4>
         <div style="max-height: 200px; overflow-y: scroll;">
     '''
-    for color in color_list:
-        legend_html += f'<div style="background-color: {color}; width: 20px; height: 20px; margin: 5px;"></div>'
+    for color, name in color_name_pairs:
+        legend_html += f'<div style="display: flex; align-items: center; margin: 5px;">'
+        legend_html += f'<div style="background-color: {color}; width: 20px; height: 20px; margin-right: 5px;"></div>'
+        legend_html += f'<span>{name}</span></div>'
     legend_html += '''
         </div>
     </div>
