@@ -1,6 +1,8 @@
-import ast
 import streamlit as st
-import leafmap.foliumap as leafmap
+import folium
+from folium.plugins import LocateControl
+from streamlit_folium import st_folium
+import geocoder
 
 st.set_page_config(layout="wide")
 
@@ -9,71 +11,28 @@ A Streamlit map template
 <https://github.com/opengeos/streamlit-map-template>
 """
 
-st.sidebar.title("About")
-st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
-st.sidebar.image(logo)
 
 
-@st.cache_data
-def get_layers(url):
-    options = leafmap.get_wms_layers(url)
-    return options
+# 顯示搜尋框
+search_location = st.text_input("搜尋地點", "Tokyo")  # 預設為東京
 
+# 使用 geocoder 取得搜尋地點的座標
+g = geocoder.osm(search_location)
 
-st.title("Web Map Service (WMS)")
-st.markdown(
-    """
-This app is a demonstration of loading Web Map Service (WMS) layers. Simply enter the URL of the WMS service
-in the text box below and press Enter to retrieve the layers. Go to https://apps.nationalmap.gov/services to find
-some WMS URLs if needed.
-"""
-)
+if g.ok:
+    # 取得搜尋結果的座標
+    lat, lng = g.latlng
+    st.write(f"搜尋地點: {search_location} 的座標是：{lat}, {lng}")
+else:
+    st.write("無法找到該地點")
 
-row1_col1, row1_col2 = st.columns([3, 1.3])
-width = None
-height = 600
-layers = None
+# 設置地圖
+m = folium.Map(location=[lat, lng], zoom_start=12)  # 使用搜尋結果的座標初始化地圖
 
-with row1_col2:
+# 添加定位控制
+LocateControl().add_to(m)
 
-    esa_landcover = "https://services.terrascope.be/wms/v2"
-    url = st.text_input(
-        "Enter a WMS URL:", value="https://services.terrascope.be/wms/v2"
-    )
-    empty = st.empty()
-
-    if url:
-        options = get_layers(url)
-
-        default = None
-        if url == esa_landcover:
-            default = "WORLDCOVER_2020_MAP"
-        layers = empty.multiselect(
-            "Select WMS layers to add to the map:", options, default=default
-        )
-        add_legend = st.checkbox("Add a legend to the map", value=True)
-        if default == "WORLDCOVER_2020_MAP":
-            legend = str(leafmap.builtin_legends["ESA_WorldCover"])
-        else:
-            legend = ""
-        if add_legend:
-            legend_text = st.text_area(
-                "Enter a legend as a dictionary {label: color}",
-                value=legend,
-                height=200,
-            )
-
-    with row1_col1:
-        m = leafmap.Map(center=(36.3, 0), zoom=2)
-
-        if layers is not None:
-            for layer in layers:
-                m.add_wms_layer(
-                    url, layers=layer, name=layer, attribution=" ", transparent=True
-                )
-        if add_legend and legend_text:
-            legend_dict = ast.literal_eval(legend_text)
-            m.add_legend(legend_dict=legend_dict)
+# 顯示地圖
+st_folium(m, height=700)
 
         m.to_streamlit(width, height)
