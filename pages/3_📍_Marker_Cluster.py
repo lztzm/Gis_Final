@@ -26,7 +26,7 @@ views = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/r
 heat_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E5%90%84%E5%8D%80%E6%99%AF%E9%BB%9E%E6%95%B8%E9%87%8F.csv")
 
 # 讀取 GeoJSON 數據
-geojson_url =   # 替換成你的 URL
+geojson_url =  "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E6%9D%B1%E4%BA%AC%E8%A1%8C%E6%94%BF%E5%8D%80%E5%88%86%E7%95%8C.geojson" # 替換成你的 URL
 geojson_data = gpd.read_file(geojson_url)
 
 # 確保緯度與經度欄位存在
