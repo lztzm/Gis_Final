@@ -12,11 +12,10 @@ import json
 st.set_page_config(layout="wide")
 
 markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
+東京在日本一級行政區中排名第45位，但日本最南端（沖之鳥島）和最東端（南鳥島）均位於其轄區內，因此擁有日本各一級行政區中最大的經緯度跨度哦。
 """
 
-st.sidebar.title("About")
+st.sidebar.title("日本小知識")
 st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
