@@ -50,8 +50,7 @@ m.add_points_from_xy(
 )
 
 m.split_map(
-    left_layer="Station", right_layer="Hotel"
+    left_layer="Station", right_layer="OpenStreetMap"
 )
-m.add_legend(title="ESA Land Cover", builtin_legend="ESA_WorldCover")
 
 m.to_streamlit(height=700)
