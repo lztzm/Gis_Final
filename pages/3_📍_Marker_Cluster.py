@@ -102,3 +102,5 @@ else:
 
     # 顯示地圖
     m.to_streamlit(height=700)
+    ########################################################
+st.table(views)  # Display the chart data as a table
