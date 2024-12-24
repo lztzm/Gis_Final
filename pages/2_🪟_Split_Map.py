@@ -43,10 +43,9 @@ color_map = {name: color_palette[i % len(color_palette)] for i, name in enumerat
 # 自定義樣式函數
 def style_function(feature):
     name = feature["properties"].get("name:en", "Unknown")
-    length = feature["properties"].get("length", 1000)  # 假設 GeoJSON 有 `length` 屬性
     return {
         "color": color_map.get(name, "#000000"),  # 自動顏色
-        "weight": max(2, length / 1000),  # 動態寬度，最小為 2
+        "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
     
