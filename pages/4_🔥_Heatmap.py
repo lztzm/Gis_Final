@@ -62,7 +62,7 @@ def style_function(feature):
 
     # 添加鐵路路線圖層，根據 "colour" 屬性顯示不同顏色
 m.add_geojson(
- filtered_geojson_rail,  # 使用篩選後的鐵路路線數據
+ geojson_data_rail,  # 使用篩選後的鐵路路線數據
  layer_name="鐵路路線",
  style_function=style_function,  # 使用自定義樣式函數
 )
