@@ -15,7 +15,7 @@ markdown = """
 東京在日本一級行政區中排名第45位，但日本最南端（沖之鳥島）和最東端（南鳥島）均位於其轄區內，因此擁有日本各一級行政區中最大的經緯度跨度哦。
 """
 
-st.sidebar.title("日本小知識")
+st.sidebar.title("東京冷知識")
 st.sidebar.info(markdown)
 logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
