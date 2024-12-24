@@ -14,7 +14,7 @@ markdown = """
 
 st.sidebar.title("東京冷知識")
 st.sidebar.info(markdown)
-logo = "https://i.imgur.com/UbOXYAU.png"
+logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
 
 st.title("🚃東京鐵路圖")
