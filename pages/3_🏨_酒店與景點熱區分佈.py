@@ -27,14 +27,18 @@ markdown = """
 -) 觀光景點及其熱點分佈圖
 -) 酒店的點分佈、圖表及補充資料
 -) 東京鐵路路線圖
-<br>
+"""
+st.markdown(markdown)
+
+markdown = """
 可以透過上面的按鈕搜尋想要的行政區哦
 同時下方地圖也有定位功能哦
-<br>
-👈🏻按這邊有更多內容哦！
-
 """
+st.markdown(markdown)
 
+markdown = """
+👈🏻按這邊有更多內容哦！
+"""
 st.markdown(markdown)
 
 # 讀取景點和熱區數據
