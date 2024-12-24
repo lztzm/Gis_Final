@@ -50,9 +50,13 @@ station_layer = m.add_points_from_xy(
     station,
     x="lat",
     y="lon",
-    color_column="railway",
     spin=True,
     add_legend=True,
+)
+
+m.add_geojson(
+    railway,
+    layer_name="鐵路路線",
 )
 
 # 使用 split_map 顯示兩個圖層
