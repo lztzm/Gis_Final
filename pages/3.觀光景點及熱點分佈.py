@@ -55,7 +55,7 @@ else:
         filtered_heat_data = heat_data[heat_data['市町村名'] == selected_district]
 
         # 過濾 GeoJSON 數據，根據 'laa' 欄位過濾
-        filtered_geojson = geojson_data[geojson_data["市町村名"] == selected_district]
+        filtered_geojson = geojson_data[geojson_data['市町村名'] == selected_district]
 
         # 獲取該區的中心點
         district_data = heat_data[heat_data['市町村名'] == selected_district]
