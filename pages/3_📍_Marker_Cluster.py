@@ -105,6 +105,7 @@ else:
     m.to_streamlit(height=700)
 
     ########################################################
-    # 根據選擇的行政區顯示表格
-    st.subheader(f"景點資料 - {selected_district}")
-    st.table(filtered_views)  # 顯示選擇的行政區的資料
+# 根據選擇的行政區顯示表格
+st.subheader(f"景點資料 - {selected_district}")
+st.dataframe(filtered_views, height=400)  # 設置高度並讓表格可滾動
+
