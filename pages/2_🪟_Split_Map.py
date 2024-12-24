@@ -56,7 +56,7 @@ station_layer = m.add_points_from_xy(
 # 使用 split_map 顯示兩個圖層
 m.split_map(
     left_layer="OpenStreetMap",
-    right_layer=hotel_layer
+    right_layer="OpenStreetMap"
 )
 
 # 顯示地圖
