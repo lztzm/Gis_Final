@@ -98,9 +98,17 @@ m.add_geojson(
     },
 )
 
-# 添加顏色圖例到地圖
-legend_dict = {name: color_map[name] for name in unique_names}
-m.add_legend(title="鐵路名稱 (name:en)", legend_dict=legend_dict)
+# 自定義 HTML 來顯示可滾動的圖例
+legend_html = """
+<div style="max-height: 200px; overflow-y: scroll; padding: 10px;">
+    <ul style="list-style: none; padding: 0;">
+"""
+for name in unique_names:
+    legend_html += f'<li style="color: {color_map[name]};">{name}</li>'
+legend_html += "</ul></div>"
+
+# 使用 Streamlit 的 HTML 顯示自定義圖例
+st.markdown(legend_html, unsafe_allow_html=True)
 
 # 添加定位功能
 folium.plugins.LocateControl().add_to(m)
