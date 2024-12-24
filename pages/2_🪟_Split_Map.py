@@ -30,7 +30,7 @@ m.add_heatmap(
 )
 
 m.split_map(
-    left_layer="ESA WorldCover 2020 S2 FCC", right_layer="Heat map"
+    left_layer="OpenStreetsMap", right_layer="Heat map"
 )
 m.add_legend(title="ESA Land Cover", builtin_legend="ESA_WorldCover")
 
