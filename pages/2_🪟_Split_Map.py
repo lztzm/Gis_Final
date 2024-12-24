@@ -39,14 +39,21 @@ unique_names = set(
     for feature in geojson_data_rail["features"]
 )
 
-# 自定義樣式函數
+# 提取唯一的顏色列表，並確保顏色不重複
+unique_colours = set(
+    feature["properties"].get("colour", "#000000")  # 默認為黑色
+    for feature in geojson_data["features"]
+)
+
+# 自定義樣式函數，根據 `colour` 欄位設置顏色
 def style_function(feature):
-    # 從 GeoJSON 特徵中獲取顏色
-    color = feature["properties"].get("colour", "#000000")  # 默認為黑色，如果沒有 color 屬性
+    colour = feature["properties"].get("colour", "#000000")  # 根據 colour 欄位設置顏色
     return {
-        "color": color,  # 根據 color 欄位設置顏色
+        "color": colour,  # 邊界顏色
         "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
+        "fillColor": colour,  # 填充顏色與邊界顏色相同
+        "fillOpacity": 0.2,   # 填充透明度
     }
 
 # 創建地圖
@@ -59,10 +66,10 @@ station_layer = m.add_points_from_xy(
     y="lon",
     spin=True,
     add_legend=True,
-    layer_name = "Station",
+    layer_name="Station",
 )
 
-# 添加鐵路路線圖層，根據 GeoJSON 中的 color 欄位顯示顏色
+# 添加鐵路路線圖層，根據 name:en 顯示不同顏色
 m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
@@ -86,12 +93,7 @@ else:
 m.add_geojson(
     filtered_geojson,  # 使用篩選後的 GeoJSON 數據
     layer_name="行政區域",
-    style={
-        "color": "blue",  # 邊界顏色
-        "weight": 2,      # 邊界寬度
-        "fillColor": "cyan",  # 填充顏色
-        "fillOpacity": 0.2,   # 填充透明度
-    },
+    style=style_function  # 使用自定義的樣式函數
 )
 
 # 自定義 HTML 來顯示可滾動的圖例
@@ -99,8 +101,8 @@ legend_html = """
 <div style="max-height: 200px; overflow-y: scroll; padding: 10px;">
     <ul style="list-style: none; padding: 0;">
 """
-for name in unique_names:
-    legend_html += f'<li style="color: {color_map.get(name, "#000000")}">{name}</li>'
+for colour in unique_colours:
+    legend_html += f'<li style="color: {colour};">{colour}</li>'
 legend_html += "</ul></div>"
 
 # 使用 Streamlit 的 HTML 顯示自定義圖例
