@@ -35,14 +35,8 @@ geojson_data_rail = response_railway.json()
 
 # 提取唯一的 `name:en` 屬性
 unique_names = set(
-    feature["properties"].get("name:en", "Unknown")
+    feature["properties"].get("colour", "Unknown")
     for feature in geojson_data_rail["features"]
-)
-
-# 提取唯一的顏色列表，並確保顏色不重複
-unique_colours = set(
-    feature["properties"].get("colour", "#000000")  # 默認為黑色
-    for feature in geojson_data["features"]
 )
 
 # 自定義樣式函數，根據 `colour` 欄位設置顏色
