@@ -9,11 +9,10 @@ from folium import plugins
 st.set_page_config(layout="wide")
 
 markdown = """
-A Streamlit map template
-<https://github.com/opengeos/streamlit-map-template>
+東京都是位於日本關東地方的一級行政區，也是日本首都，是日本唯一以「都」命名的行政區哦。
 """
 
-st.sidebar.title("About")
+st.sidebar.title("東京冷知識")
 st.sidebar.info(markdown)
 logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
