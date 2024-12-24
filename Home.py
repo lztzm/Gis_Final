@@ -33,6 +33,11 @@ markdown = """
 
 st.markdown(markdown)
 
+#############################
+markdown = """
+以下是東京都政府統計的各國到訪東京的比例
+"""
+#############################
 # 準備數據
 data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%9C%8B%E7%B1%8D.csv")
 
