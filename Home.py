@@ -19,7 +19,7 @@ logo = "https://i.imgur.com/UbOXYAU.png"
 st.sidebar.image(logo)
 
 # Customize page title
-st.title("東京的旅遊景點以及鐵路視覺化")
+st.title("東京觀光地圖")
 
 
 st.header("簡介")
