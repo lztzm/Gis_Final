@@ -7,6 +7,8 @@ import geopandas as gpd
 import plotly.express as px
 import requests
 import pydeck as pdk
+import plotly.express as px
+
 
 st.set_page_config(layout="wide")
 
@@ -66,7 +68,19 @@ st.pydeck_chart(
         ],
     )
 )
+#########################################
+pie = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4%20%E6%A9%AB%E5%BC%8F.csv")
 
+# 繪製圓餅圖
+    fig = px.pie(
+        pie,
+        names="國家/入境機場	",
+        values="全體",
+        title="景點數量圓餅圖",
+        hole=0.3,  # 中心空洞比例（甜甜圈圖效果）
+    )
+
+#########################################
 chart_data = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E8%A7%80%E5%85%89%E5%AE%A2%E5%85%A5%E5%9C%8B%E6%A9%9F%E5%A0%B4.csv")
 # Show the table of chart_data
 st.table(chart_data)  # Display the chart data as a table
