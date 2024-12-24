@@ -39,14 +39,40 @@ m = leafmap.Map()
 districts = ['全部區域'] + list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
 selected_district = st.selectbox('選擇行政區', districts)
 
-# 根據選擇的行政區過濾 GeoJSON 數據
-if selected_district != '全部區域':
-    filtered_geojson = {
+# 確保緯度與經度欄位存在
+if '緯度' not in views.columns or '經度' not in views.columns:
+    st.error("CSV檔案中缺少緯度或經度欄位！")
+else:
+    # 獲取所有的行政區，並添加一個 "全部區域" 選項
+    districts = ['全部區域'] list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
+    
+    # 添加選擇行政區的 selectbox 到應用程式的主要區域
+    selected_district = st.selectbox('選擇行政區', districts)
+
+    # 根據選擇的行政區過濾景點資料
+    if selected_district == '全部區域':
+        filtered_station = station
+        filtered_heat_data = heat_data
+        filtered_geojson = filtered_geojson = {
         "type": "FeatureCollection",
         "features": [feature for feature in geojson_data["features"] if feature["properties"].get("laa", "") == selected_district]
     }
-else:
-    filtered_geojson = geojson_data  # 如果選擇 "全部區域"，顯示全部區域
+        filtered_geojson_rail = geojson_data_rail
+        map_center = [35.68388267239132, 139.77317043877568]  # 東京的中心位置
+    else:
+        # 過濾景點和熱區數據
+        filtered_station = views[views['市町村名'] == selected_district]
+        filtered_heat_data = heat_data[heat_data['市町村名'] == selected_district]
+
+        # 過濾 GeoJSON 數據，根據 'laa' 欄位過濾
+        filtered_geojson = geojson_data[geojson_data["laa"] == selected_district]
+
+        # 獲取該區的中心點
+        district_data = heat_data[heat_data['市町村名'] == selected_district]
+        map_center = [district_data['緯度'].mean(), district_data['經度'].mean()]
+    
+    # 將篩選後的 GeoJSON 轉換為 JSON
+    filtered_geojson_json = json.loads(filtered_geojson.to_json())
 
 # 添加篩選後的 GeoJSON 圖層
 m.add_geojson(
