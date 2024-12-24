@@ -76,7 +76,7 @@ fig = px.pie(
     names="國家/入境機場",
     values="全體",
     title="景點數量圓餅圖",
-    hole=0.3,  # 中心空洞比例（甜甜圈圖效果）
+    hole=0,  # 中心空洞比例（甜甜圈圖效果）
 )
 
 st.plotly_chart(fig)
