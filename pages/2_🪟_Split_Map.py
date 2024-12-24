@@ -63,13 +63,16 @@ station_layer = m.add_points_from_xy(
 )
 
 # 添加鐵路路線圖層，根據 GeoJSON 的 `color` 欄位來顯示顏色
-m.add_geojson(
+railway_layer = m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
     style_function=style_function,
-    # 使用 popup 顯示 name, name:en, name:zh 資訊
-    popup=folium.GeoJsonPopup(fields=["name", "name:en", "name:zh"], labels=True),
 )
+
+# 設置每個鐵路路線的 popup
+for feature in geojson_data_rail["features"]:
+    popup = folium.GeoJsonPopup(fields=["name", "name:en", "name:zh"], labels=True)
+    folium.GeoJson(feature, popup=popup).add_to(railway_layer)
 
 # 提供選擇行政區的功能
 districts = ['全部區域'] + list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
