@@ -33,28 +33,29 @@ else:
     # 根據選擇的行政區過濾景點資料
     if selected_district == '全部區域':
         filtered_views = views
+        filtered_heat_data = heat_data
         map_center = [35.68388267239132, 139.77317043877568]  # 東京的中心位置
     else:
         filtered_views = views[views['市町村名'] == selected_district]
+        filtered_heat_data = heat_data[heat_data['市町村名'] == selected_district]
         district_data = heat_data[heat_data['市町村名'] == selected_district]
         map_center = [district_data['緯度'].mean(), district_data['經度'].mean()]
-        
+    
     # 初始化地圖
-    m = leafmap.Map(center=[35.68388267239132, 139.77317043877568], zoom=12)
+    m = leafmap.Map(center=map_center, zoom=12)
 
-    # 添加點標記
+    # 添加篩選後的點標記
     m.add_points_from_xy(
-        views,
+        filtered_views,  # 使用篩選後的資料
         x="經度",
         y="緯度",
         spin=True,
         add_legend=True,
     )
 
-    # 添加熱區地圖
-    heatmap_layer = leafmap.folium.FeatureGroup(name="熱區地圖")
+    # 添加篩選後的熱區地圖
     m.add_heatmap(
-        heat_data,
+        filtered_heat_data,  # 使用篩選後的資料
         latitude="緯度",
         longitude="經度",
         value="景點數量",
@@ -63,7 +64,7 @@ else:
     )
 
     # 新增圖層控制
-    leafmap.folium.LayerControl().add_to(m)
+    m.add_layer_control()
 
     # 顯示地圖
     m.to_streamlit(height=700)
