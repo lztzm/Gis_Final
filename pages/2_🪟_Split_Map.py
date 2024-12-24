@@ -30,6 +30,9 @@ region_url = "https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/hea
 response = requests.get(region_url)
 geojson_data = response.json()
 
+response_railway = requests.get(railway_url)
+geojson_data_rail = response.json()
+
 # 提取唯一的 `name:en` 屬性
 unique_names = set(
     feature["properties"].get("name:en", "Unknown")
