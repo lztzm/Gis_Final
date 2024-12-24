@@ -3,6 +3,7 @@ import leafmap.foliumap as leafmap
 import pandas as pd
 import requests
 import folium
+from folium import plugins
 
 st.set_page_config(layout="wide")
 
@@ -31,16 +32,6 @@ geojson_data = response.json()
 response_railway = requests.get(railway_url)
 geojson_data_rail = response_railway.json()
 
-# 自定義樣式函數，根據 "colour" 屬性設置顏色
-def style_function(feature):
-    colour = feature["properties"].get("colour", "#000000")  # 默認為黑色
-    return {
-        "color": colour,  # 邊界顏色
-        "weight": 2,      # 邊界寬度
-        "fillOpacity": 0.2,   # 填充透明度
-        "fillColor": colour,  # 填充顏色
-    }
-
 # 創建地圖
 m = leafmap.Map()
 
@@ -53,6 +44,16 @@ station_layer = m.add_points_from_xy(
     add_legend=True,
     layer_name = "Station",
 )
+
+# 自定義樣式函數，根據 "colour" 屬性設置顏色
+def style_function(feature):
+    colour = feature["properties"].get("colour", "#000000")  # 默認為黑色
+    return {
+        "color": colour,  # 邊界顏色
+        "weight": 2,      # 邊界寬度
+        "fillOpacity": 0.2,   # 填充透明度
+        "fillColor": colour,  # 填充顏色
+    }
 
 # 添加鐵路路線圖層，根據 "colour" 屬性顯示不同顏色
 m.add_geojson(
@@ -85,6 +86,28 @@ m.add_geojson(
         "fillOpacity": 0.2,   # 填充透明度
     },
 )
+
+# 創建圖例 HTML
+legend_html = """
+    <div style="position: fixed; bottom: 50px; right: 10px; background-color: white; border-radius: 5px; padding: 10px; z-index: 9999;">
+        <h4>鐵路路線顏色圖例</h4>
+        <ul style="list-style-type: none; padding: 0;">
+"""
+
+# 為每條鐵路路線添加顏色和名稱
+for feature in geojson_data_rail['features']:
+    color = feature['properties'].get('colour', '#000000')
+    name = feature['properties'].get('name:en', 'Unknown')
+    legend_html += f'<li><span style="display: inline-block; width: 20px; height: 20px; background-color: {color};"></span> {name}</li>'
+
+legend_html += """
+        </ul>
+    </div>
+"""
+
+# 添加圖例到地圖
+legend = folium.Popup(folium.Html(legend_html, script=True), max_width=500)
+folium.Marker([35.68, 139.76], popup=legend).add_to(m)
 
 # 添加定位功能
 folium.plugins.LocateControl().add_to(m)
