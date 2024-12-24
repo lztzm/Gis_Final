@@ -68,10 +68,10 @@ else:
         filtered_geojson,  # 使用篩選後的 GeoJSON 數據
         layer_name="行政區域",
         style={
-            "color": "blue",  # 邊界顏色
+            "color": "grey",  # 邊界顏色
             "weight": 2,      # 邊界寬度
-            "fillColor": "cyan",  # 填充顏色
-            "fillOpacity": 0.2,   # 填充透明度
+            "fillColor": "wihte",  # 填充顏色
+            "fillOpacity": 0.1,   # 填充透明度
         },
     )
 
