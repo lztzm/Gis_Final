@@ -37,7 +37,7 @@ geojson_data_rail = response_railway.json()
 m = leafmap.Map()
 
 # 提供選擇行政區的功能
-districts = ['全部區域'] + list(set([feature["properties"].get("laa", "Unknown") for feature in geojson_data["features"]]))
+districts = ['全部區域'] + list(set([feature["properties"].get("市町村名", "Unknown") for feature in geojson_data["features"]]))
 selected_district = st.selectbox('選擇行政區', districts)
 
 # 確保緯度與經度欄位存在
@@ -56,7 +56,7 @@ else:
         filtered_heat_data = heat_data[heat_data['市町村名'] == selected_district]
         filtered_geojson = {
             "type": "FeatureCollection",
-            "features": [feature for feature in geojson_data["features"] if feature["properties"].get("laa", "") == selected_district]
+            "features": [feature for feature in geojson_data["features"] if feature["properties"].get("市町村名", "") == selected_district]
         }
         filtered_geojson_rail = geojson_data_rail  # 可選擇過濾鐵路路線
         # 獲取該區的中心點
