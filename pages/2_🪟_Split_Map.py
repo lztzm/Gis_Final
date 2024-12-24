@@ -42,7 +42,7 @@ unique_names = set(
 # 自定義樣式函數
 def style_function(feature):
     # 從 GeoJSON 特徵中獲取顏色
-    color = feature["properties"].get("color", "#000000")  # 默認為黑色，如果沒有 color 屬性
+    color = feature["properties"].get("colour", "#000000")  # 默認為黑色，如果沒有 color 屬性
     return {
         "color": color,  # 根據 color 欄位設置顏色
         "weight": max(2, 5),  # 動態寬度，最小為 2
