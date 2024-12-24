@@ -61,12 +61,12 @@ m.add_geojson(
 )
 ################################################
 m.add_points_from_xy(
-        station,  # 使用篩選後的資料
-        x="經度",
-        y="緯度",
-        spin=True,
-        add_legend=True,
-    )
+    station,  # 使用篩選後的資料
+    x="經度",
+    y="緯度",
+    spin=True,
+    add_legend=True,
+)
 ###############################################
 # 自定義樣式函數，根據 "colour" 屬性設置顏色
 def style_function(feature):
