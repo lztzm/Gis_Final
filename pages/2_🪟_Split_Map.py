@@ -71,8 +71,7 @@ else:
             "color": "grey",  # 邊界顏色
             "weight": 1.5,      # 邊界寬度
             "opacity": 0.5,     # Line transparency
-            "fillColor": "wihte",  # 填充顏色
-            "fillopacity": 0.1
+            "fillColor": "none",  # 填充顏色
         },
     )
 
