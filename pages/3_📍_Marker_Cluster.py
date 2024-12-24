@@ -88,7 +88,7 @@ else:
         style={
             "color": "grey",  # 邊界顏色
             "weight": 1.5,      # 邊界寬度
-            "opacity": 0.5
+            "opacity": 0.5,
             "fillColor": "wihte",  # 填充顏色
             "fillOpacity": 0.1,   # 填充透明度
         },
