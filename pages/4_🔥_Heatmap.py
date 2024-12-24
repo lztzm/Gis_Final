@@ -48,7 +48,7 @@ m.add_heatmap(
  value="景點數量",
  name="Heat map",
  radius=30,
- opacity = 0.5,
+ opacity = 0.2,
 )
 
 # 自定義樣式函數，根據 "colour" 屬性設置顏色
