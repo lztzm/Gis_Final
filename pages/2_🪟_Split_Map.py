@@ -39,16 +39,12 @@ unique_names = set(
     for feature in geojson_data_rail["features"]
 )
 
-# 自動生成顏色表
-color_palette = list(mcolors.CSS4_COLORS.keys())  # 使用 Matplotlib 的顏色表
-random.shuffle(color_palette)  # 隨機排序
-color_map = {name: color_palette[i % len(color_palette)] for i, name in enumerate(unique_names)}
-
 # 自定義樣式函數
 def style_function(feature):
-    name = feature["properties"].get("name:en", "Unknown")
+    # 從 GeoJSON 特徵中提取顏色屬性
+    color = feature["properties"].get("color", "#000000")  # 默認顏色為黑色
     return {
-        "color": color_map.get(name, "#000000"),  # 根據 name:en 屬性設置顏色
+        "color": color,  # 使用 GeoJSON 中的 `color` 屬性作為顏色
         "weight": max(2, 5),  # 動態寬度，最小為 2
         "opacity": 0.8,
     }
@@ -63,14 +59,16 @@ station_layer = m.add_points_from_xy(
     y="lon",
     spin=True,
     add_legend=True,
-    layer_name = "Station",
+    layer_name="Station",
 )
 
-# 添加鐵路路線圖層，根據 name:en 顯示不同顏色
+# 添加鐵路路線圖層，根據 GeoJSON 的 `color` 欄位來顯示顏色
 m.add_geojson(
     geojson_data_rail,
     layer_name="鐵路路線",
     style_function=style_function,
+    # 使用 popup 顯示 name, name:en, name:zh 資訊
+    popup=folium.GeoJsonPopup(fields=["name", "name:en", "name:zh"], labels=True),
 )
 
 # 提供選擇行政區的功能
@@ -104,7 +102,7 @@ legend_html = """
     <ul style="list-style: none; padding: 0;">
 """
 for name in unique_names:
-    legend_html += f'<li style="color: {color_map[name]};">{name}</li>'
+    legend_html += f'<li style="color: {color_map.get(name, "#000000")};">{name}</li>'
 legend_html += "</ul></div>"
 
 # 使用 Streamlit 的 HTML 顯示自定義圖例
@@ -118,4 +116,3 @@ m.add_layer_control()
 
 # 顯示地圖
 m.to_streamlit(height=700)
-
