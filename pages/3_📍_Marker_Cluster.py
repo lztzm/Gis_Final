@@ -63,6 +63,19 @@ else:
         radius=20,
     )
 
+    # **添加 GeoJSON 圖層**
+    geojson_url = "https://raw.githubusercontent.com/你的GitHubRepo/東京行政區域.geojson"  # 替換成你的 GeoJSON 文件 URL
+    m.add_geojson(
+        geojson_url,
+        layer_name="行政區域",
+        style={
+            "color": "blue",  # 邊界顏色
+            "weight": 2,      # 邊界寬度
+            "fillColor": "cyan",  # 填充顏色
+            "fillOpacity": 0.2,   # 填充透明度
+        },
+    )
+
     # 新增圖層控制
     m.add_layer_control()
 
