@@ -22,36 +22,26 @@ st.sidebar.image(logo)
 
 st.title("🏨酒店與景點熱區分佈")
 
-markdown = """
+"""
 這一頁是觀光景點及熱點分佈，這邊你可以找到
 """
-st.markdown(markdown)
-
-markdown = """
+"""
 -) 觀光景點及其熱點分佈圖
 """
-st.markdown(markdown)
-
-markdown = """
+"""
 -) 酒店的點分佈、圖表及補充資料
 """
-st.markdown(markdown)
-
-markdwon= """
+"""
 -) 東京鐵路路線圖
 """
-st.markdown(markdown)
-
-markdown = """
+ """
 可以透過上面的按鈕搜尋想要的行政區哦
 同時下方地圖也有定位功能哦
 """
-st.markdown(markdown)
-
-markdown = """
+"""
 👈🏻按這邊有更多內容哦！
 """
-st.markdown(markdown)
+
 
 # 讀取景點和熱區數據
 Hotel = pd.read_csv("https://raw.githubusercontent.com/lztzm/Gis_Final_Project/refs/heads/main/%E9%85%92%E5%BA%97%E5%90%8D%E5%96%AE.csv")
