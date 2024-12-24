@@ -109,3 +109,6 @@ else:
 
     # 顯示地圖
     m.to_streamlit(height=700)
+    #################################
+st.image("https://www.tokyometro.jp/tcn/subwaymap/img/img_01.png")
+
