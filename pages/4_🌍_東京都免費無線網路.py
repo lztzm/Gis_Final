@@ -16,6 +16,7 @@ st.sidebar.info(markdown)
 logo = "https://img.olympics.com/images/image/private//f_auto/primary/utp8z5rbcrcqcbcnfswh"
 st.sidebar.image(logo)
 
+st.title("🌍東京都免費無線網路")
 """
 這一頁是東京都免費無線網路，這邊你可以找到
 """
@@ -89,7 +90,7 @@ data = load_data()
 if not data.empty:
     try:
         midpoint = mpoint(data["緯度"], data["経度"])
-        st.title("🌍東京都免費無線網路")
+        
         map(data, midpoint[0], midpoint[1], 11)
     except Exception as e:
         st.write(f"Error in main application: {e}")
