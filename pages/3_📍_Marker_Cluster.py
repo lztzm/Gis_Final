@@ -210,5 +210,4 @@ else:
 
     ########################################################
     # 根據選擇的行政區顯示表格
-    st.subheader(f"景點資料 - {selected_district}")
     st.table(filtered_views)  # 顯示選擇的行政區的資料
