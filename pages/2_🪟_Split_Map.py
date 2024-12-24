@@ -52,7 +52,6 @@ m.add_geojson(
     layer_name="鐵路路線",
     style={
         "color": "colour"
-        "weight": 2, 
         "opacity": 0.8,
     },
 )
