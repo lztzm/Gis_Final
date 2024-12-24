@@ -61,9 +61,6 @@ else:
         district_data = heat_data[heat_data['市町村名'] == selected_district]
         map_center = [district_data['緯度'].mean(), district_data['經度'].mean()]
     
-    # 將篩選後的 GeoJSON 轉換為 JSON
-    filtered_geojson_json = json.loads(filtered_geojson.to_json())
-
     # 初始化地圖
     m = leafmap.Map(center=map_center, zoom=12)
 
@@ -88,7 +85,7 @@ else:
 
     # 添加篩選後的 GeoJSON 圖層
     m.add_geojson(
-        filtered_geojson_json,  # 使用篩選後的 GeoJSON 數據
+        filtered_geojson,  # 使用篩選後的 GeoJSON 數據
         layer_name="行政區域",
         style={
             "color": "grey",  # 邊界顏色
